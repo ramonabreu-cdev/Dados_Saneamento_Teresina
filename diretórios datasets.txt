@@ -1,0 +1,9 @@
+Convênios e outros acordos ok (09 - 19)
+http://www.portaltransparencia.gov.br/convenios/consulta?paginacaoSimples=true&tamanhoPagina=&offset=&direcaoOrdenacao=asc&periodoLiberacaoRecursosDe=01%2F01%2F2009&periodoLiberacaoRecursosAte=30%2F11%2F2019&periodoVigenciaDe=01%2F01%2F2009&periodoVigenciaAte=30%2F11%2F2019&uf=PI&municipio=21280&funcaoSubfuncao=SB512&colunasSelecionadas=linkDetalhamento%2CnumeroConvenio%2CnumeroOriginal%2Cuf%2CmunicipioConvenente%2Csituacao%2CtipoTransferencia%2Cobjetivo%2CorgaoSuperior%2Corgao%2Cconcedente%2Cconvenente%2CdataInicioVigencia%2CdataFimVigencia%2CvalorCelebrado&ordenarPor=orgao&direcao=desc
+
+emendas
+http://www.portaltransparencia.gov.br/emendas/consulta?ordenarPor=localidadeDoGasto&direcao=asc
+
+
+transferencias
+http://www.portaltransparencia.gov.br/transferencias/consulta?paginacaoSimples=true&tamanhoPagina=&offset=&direcaoOrdenacao=asc&de=01%2F01%2F2009&ate=30%2F11%2F2019&uf=PI&municipio=21280&funcao=17&colunasSelecionadas=linkDetalhamento%2Cuf%2Cmunicipio%2Ctipo%2CtipoFavorecido%2Cacao%2ClinguagemCidada%2CgrupoDespesa%2CelementoDespesa%2CmodalidadeDespesa%2Cvalor&ordenarPor=mesAno&direcao=desc

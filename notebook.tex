@@ -1,0 +1,790 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Saneamento Teresina - PI}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Saneamento Teresina-PI}\label{saneamento-teresina-pi}
+
+    -\/- Os Dados usados nesse breve estudo São públicos , e estão
+disponíveis para consulta !
+
+Convênios e outros acordos (09 - 19)
+http://www.portaltransparencia.gov.br/convenios/consulta?paginacaoSimples=true\&tamanhoPagina=\&offset=\&direcaoOrdenacao=asc\&periodoLiberacaoRecursosDe=01\%2F01\%2F2009\&periodoLiberacaoRecursosAte=30\%2F11\%2F2019\&periodoVigenciaDe=01\%2F01\%2F2009\&periodoVigenciaAte=30\%2F11\%2F2019\&uf=PI\&municipio=21280\&funcaoSubfuncao=SB512\&colunasSelecionadas=linkDetalhamento\%2CnumeroConvenio\%2CnumeroOriginal\%2Cuf\%2CmunicipioConvenente\%2Csituacao\%2CtipoTransferencia\%2Cobjetivo\%2CorgaoSuperior\%2Corgao\%2Cconcedente\%2Cconvenente\%2CdataInicioVigencia\%2CdataFimVigencia\%2CvalorCelebrado\&ordenarPor=orgao\&direcao=desc
+
+Emendas(09 - 19)
+http://www.portaltransparencia.gov.br/emendas/consulta?ordenarPor=localidadeDoGasto\&direcao=asc
+
+Transferências(09 - 19)
+http://www.portaltransparencia.gov.br/transferencias/consulta?paginacaoSimples=true\&tamanhoPagina=\&offset=\&direcaoOrdenacao=asc\&de=01\%2F01\%2F2009\&ate=30\%2F11\%2F2019\&uf=PI\&municipio=21280\&funcao=17\&colunasSelecionadas=linkDetalhamento\%2Cuf\%2Cmunicipio\%2Ctipo\%2CtipoFavorecido\%2Cacao\%2ClinguagemCidada\%2CgrupoDespesa\%2CelementoDespesa\%2CmodalidadeDespesa\%2Cvalor\&ordenarPor=mesAno\&direcao=desc
+>> Para iniciar , vamos Importar as Bibliotecas Que serão Ultilizadas :
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}  
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \begin{itemize}
+\tightlist
+\item
+  Importamos Todos os DataSets
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{conv\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}excel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{convenio.xlsx}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} Dados de 2009 \PYZti{} 2019 }
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{transf\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}excel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{transferencia.xlsx}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Dados de 2009 \PYZti{} 2019 }
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{emen\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}excel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{emendaspi.xlsx}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} Dados de 2009 \PYZti{} 2019 }
+\end{Verbatim}
+
+
+    \begin{itemize}
+\tightlist
+\item
+  Iniciando pelo menor DataSet
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{emen\PYZus{}df} \PY{c+c1}{\PYZsh{} Emendas}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:}     Ano Nome do autor  Número da emenda Localidade do gasto (Regionalização)  \textbackslash{}
+        0  2016   PAES LANDIM                 3                                PIAUÍ   
+        1  2016  REGINA SOUSA                16                                PIAUÍ   
+        2  2017   PAES LANDIM                 3                                PIAUÍ   
+        3  2017  REGINA SOUSA                17                                PIAUÍ   
+        4  2018   PAES LANDIM                 6                                PIAUÍ   
+        5  2016  REGINA SOUSA                 1                                PIAUÍ   
+        6  2016  SILAS FREIRE                 3                                PIAUÍ   
+        7  2018    ATILA LIRA                 6                                PIAUÍ   
+        
+          Função                 Subfunção  Valor empenhado  Valor liquidado  \textbackslash{}
+        0  Saúde  Saneamento básico urbano           300000                0   
+        1  Saúde  Saneamento básico urbano          1065806                0   
+        2  Saúde  Saneamento básico urbano          1200000                0   
+        3  Saúde  Saneamento básico urbano          1600000                0   
+        4  Saúde  Saneamento básico urbano          1981136             8730   
+        5  Saúde  Saneamento básico urbano          2131612                0   
+        6  Saúde  Saneamento básico urbano          2322870                0   
+        7  Saúde  Saneamento básico urbano          2600000             9000   
+        
+           Valor pago  
+        0           0  
+        1           0  
+        2           0  
+        3           0  
+        4        8730  
+        5           0  
+        6           0  
+        7        9000  
+\end{Verbatim}
+            
+    \begin{itemize}
+\tightlist
+\item
+  Buscando algumas Informações
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{emen\PYZus{}df}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 8 entries, 0 to 7
+Data columns (total 9 columns):
+Ano                                     8 non-null int64
+Nome do autor                           8 non-null object
+Número da emenda                        8 non-null int64
+Localidade do gasto (Regionalização)    8 non-null object
+Função                                  8 non-null object
+Subfunção                               8 non-null object
+Valor empenhado                         8 non-null int64
+Valor liquidado                         8 non-null int64
+Valor pago                              8 non-null int64
+dtypes: int64(5), object(4)
+memory usage: 656.0+ bytes
+
+    \end{Verbatim}
+- Verificando o valor Total do Empenho das Emendas :
+
+    \begin{itemize}
+\tightlist
+\item
+  O empenho da despesa é um ato administrativo. Isto significa que o
+  empenho em si não cria a obrigação de pagamento, ou seja, não gera um
+  passivo em termos patrimoniais. Assim, a obrigação de pagamento só
+  surge após a etapa da liquidação (segunda etapa da execução
+  orçamentária da despesa).
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{total\PYZus{}emp\PYZus{}emen} \PY{o}{=} \PY{n}{emen\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Valor empenhado}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{total\PYZus{}emp\PYZus{}emen} \PY{c+c1}{\PYZsh{} Valor em Reais }
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} 13201424
+\end{Verbatim}
+            
+    \begin{itemize}
+\tightlist
+\item
+  Empenhos em Forma de Histograma
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{emen\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Valor empenhado}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x2002fbaa588>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    - Verificando o Valor Total Liquidado das Emendas 
+    \begin{itemize}
+\tightlist
+\item
+  liquidação é quando se verifica que o governo recebeu aquilo que
+  comprou. Ou seja, quando se confere que o bem foi entregue
+  corretamente ou que a etapa da obra foi concluída como acordado.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{total\PYZus{}liq\PYZus{}emen} \PY{o}{=} \PY{n}{emen\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Valor liquidado}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{total\PYZus{}liq\PYZus{}emen} \PY{c+c1}{\PYZsh{} Valor em Reais R\PYZdl{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} 17730
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{emen\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Valor liquidado}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x2002fcaa748>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{dif\PYZus{}liqxemp\PYZus{}emen} \PY{o}{=} \PY{n}{total\PYZus{}liq\PYZus{}emen} \PY{o}{\PYZhy{}} \PY{n}{total\PYZus{}emp\PYZus{}emen}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{dif\PYZus{}liqxemp\PYZus{}emen}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} -13183694
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{plo} \PY{o}{=} \PY{n}{emen\PYZus{}df}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Valor empenhado}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Valor liquidado}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{)}\PY{p}{,}\PY{n}{kind} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}38}]:} Text(0.5,1,'Comparação Anual Valores Empenhados x Liquidados')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{,} \PY{n}{subplot\PYZus{}kw}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{aspect}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{equal}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{recipe} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{13201424.00 R\PYZdl{} Valor Empenhado}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ 17730.00 R\PYZdl{} Valor Liquidado}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         
+         \PY{n}{data} \PY{o}{=} \PY{p}{[}\PY{n+nb}{float}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{recipe}\PY{p}{]}
+         \PY{n}{valores} \PY{o}{=} \PY{p}{[}\PY{n}{x}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{recipe}\PY{p}{]}
+         
+         
+         \PY{k}{def} \PY{n+nf}{func}\PY{p}{(}\PY{n}{pct}\PY{p}{,} \PY{n}{allvals}\PY{p}{)}\PY{p}{:}
+             \PY{n}{absolute} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{pct}\PY{o}{/}\PY{l+m+mf}{100.}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{allvals}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}:.1f\PYZcb{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{(}\PY{l+s+si}{\PYZob{}:d\PYZcb{}}\PY{l+s+s2}{ R\PYZdl{})}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{pct}\PY{p}{,} \PY{n}{absolute}\PY{p}{)}
+         
+         
+         \PY{n}{wedges}\PY{p}{,} \PY{n}{texts}\PY{p}{,} \PY{n}{autotexts} \PY{o}{=} \PY{n}{ax}\PY{o}{.}\PY{n}{pie}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{autopct}\PY{o}{=}\PY{k}{lambda} \PY{n}{pct}\PY{p}{:} \PY{n}{func}\PY{p}{(}\PY{n}{pct}\PY{p}{,} \PY{n}{data}\PY{p}{)}\PY{p}{,}
+                                           \PY{n}{textprops}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{ax}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{wedges}\PY{p}{,} \PY{n}{ingredients}\PY{p}{,}
+                   \PY{n}{title}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{valores}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{n}{loc}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{center left}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                   \PY{n}{bbox\PYZus{}to\PYZus{}anchor}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{setp}\PY{p}{(}\PY{n}{autotexts}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{weight}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bold}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Comparação Total Valores Empenhados x Liquidados}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{conv\PYZus{}df}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}41}]:}     Número     Número Original  UF Município                Situação  \textbackslash{}
+         0   593585    CR.NR.0218090-94  PI  TERESINA  INADIMPLÊNCIA SUSPENSA   
+         1   607517    CR.NR.0237817-77  PI  TERESINA               CONCLUÍDO   
+         2   607518    CR.NR.0238154-82  PI  TERESINA               CONCLUÍDO   
+         3   648108      TC/PAC 0603/08  PI  TERESINA            INADIMPLENTE   
+         4   649609      TC/PAC 0642/08  PI  TERESINA            INADIMPLENTE   
+         5   649621      TC/PAC 0604/08  PI  TERESINA              ADIMPLENTE   
+         6   658222      TC/PAC 0333/09  PI  TERESINA            INADIMPLENTE   
+         7   658549      TC/PAC 0866/09  PI  TERESINA              ADIMPLENTE   
+         8   658552      TC/PAC 0315/09  PI  TERESINA              ADIMPLENTE   
+         9   658562      TC/PAC 0327/09  PI  TERESINA               CONCLUÍDO   
+         10  659258      TC/PAC 0321/09  PI  TERESINA              ADIMPLENTE   
+         11  660237      TC/PAC 0163/09  PI  TERESINA              ADIMPLENTE   
+         12  666749    CR.NR.0339073-43  PI  TERESINA              ADIMPLENTE   
+         13  669499      TC/PAC 0487/11  PI  TERESINA              ADIMPLENTE   
+         14  669501      TC/PAC 0503/11  PI  TERESINA              ADIMPLENTE   
+         15  670817    CR.NR.0351127-34  PI  TERESINA               CONCLUÍDO   
+         16  670829    CR.NR.0351063-76  PI  TERESINA              ADIMPLENTE   
+         17  670945    CR.NR.0351316-23  PI  TERESINA               CONCLUÍDO   
+         18  670970    CR.NR.0351004-58  PI  TERESINA              ADIMPLENTE   
+         19  671378    CR.NR.0350923-56  PI  TERESINA              ADIMPLENTE   
+         20  671391    CR.NR.0350865-53  PI  TERESINA               CONCLUÍDO   
+         21  672197      TC/PAC 0111/12  PI  TERESINA              ADIMPLENTE   
+         22  673834    CR.NR.0402546-97  PI  TERESINA              ADIMPLENTE   
+         23  673835    CR.NR.0402545-83  PI  TERESINA              ADIMPLENTE   
+         24  673843    CR.NR.0402547-00  PI  TERESINA               CONCLUÍDO   
+         25  673847    CR.NR.0402509-48  PI  TERESINA              ADIMPLENTE   
+         26  673849    CR.NR.0402512-95  PI  TERESINA              ADIMPLENTE   
+         27  673851    CR.NR.0402518-50  PI  TERESINA              ADIMPLENTE   
+         28  673864    CR.NR.0402537-86  PI  TERESINA               CONCLUÍDO   
+         29  673866    CR.NR.0402536-72  PI  TERESINA              ADIMPLENTE   
+         30  676813    CR.NR.0408668-02  PI  TERESINA               CONCLUÍDO   
+         31  676853    CR.NR.0408711-30  PI  TERESINA               CONCLUÍDO   
+         32  677865  TC - 0.157.00/2013  PI  TERESINA              ADIMPLENTE   
+         33  682498      TC/PAC 0161/14  PI  TERESINA              ADIMPLENTE   
+         34  817899          00002/2015  PI  TERESINA             EM EXECUÇÃO   
+         
+              Tipo de Instrumento                                             Objeto  \textbackslash{}
+         0    CONTRATO DE REPASSE  INTERVENCAO NOS SISTEMAS DE ABASTECIMENTO DE A{\ldots}   
+         1    CONTRATO DE REPASSE  AMPLIACAO DE SISTEMA ABASTECIMENTO DE AGUA DE {\ldots}   
+         2    CONTRATO DE REPASSE  AMPLIACAO DO SISTEMA DE ABASTECIMENTO DE AGUA {\ldots}   
+         3   TERMO DE COMPROMISSO  SISTEMA DE ABASTECIMENTO DE ÁGUA PARA ATENDER {\ldots}   
+         4   TERMO DE COMPROMISSO  SISTEMA DE ABASTECIMENTO DE AGUA   MUNICIPIO D{\ldots}   
+         5   TERMO DE COMPROMISSO  SISTEMA DE ABASTECIMENTO DE AGUA PARA ATENDER {\ldots}   
+         6   TERMO DE COMPROMISSO  SISTEMA DE ABASTECIMENTO DE ÁGUA PARA ATENDER {\ldots}   
+         7   TERMO DE COMPROMISSO  EXECUÇÃO DE SISTEMA DE ABASTECIMENTO DE ÁGUA P{\ldots}   
+         8   TERMO DE COMPROMISSO  EXECUCAO DE SISTEMAS DE ABASTECIMENTO DE ÁGUA {\ldots}   
+         9         Sem informação  SISTEMA DE ABASTECIMENTO DE ÁGUA PARA ATENDER {\ldots}   
+         10  TERMO DE COMPROMISSO  EXECUCAO DE SISTEMAS DE ABASTECIMENTO DE AGUA {\ldots}   
+         11  TERMO DE COMPROMISSO  SISTEMA DE ABASTECIMENTO DE ÁGUA PARA ATENDER {\ldots}   
+         12  TERMO DE COMPROMISSO  IMPLANTACAO DE SISTEMA DE MACRODRENAGEM EM OEIRAS   
+         13  TERMO DE COMPROMISSO                  SISTEMA DE ESGOTAMENTO SANITÁRIO.   
+         14  TERMO DE COMPROMISSO                  SISTEMA DE ESGOTAMENTO SANITÁRIO.   
+         15  TERMO DE COMPROMISSO  Elaboracao de Estudo de concepcao e Projeto de{\ldots}   
+         16  TERMO DE COMPROMISSO  Elaboracao de Projeto para Ampliacao e Melhori{\ldots}   
+         17  TERMO DE COMPROMISSO  Elaboracao do Plano Municipal de Saneamento Am{\ldots}   
+         18  TERMO DE COMPROMISSO  DRENAGEM URBANA   GALERIAS PLUVIAIS   ZONA LES{\ldots}   
+         19  TERMO DE COMPROMISSO  Implantacao do SES de PiripiriPI  rede coletor{\ldots}   
+         20  TERMO DE COMPROMISSO  Ampliacao do Sistema de Esgotamento sanitario {\ldots}   
+         21  TERMO DE COMPROMISSO                   SISTEMA DE ESGOTAMENTO SANITáRIO   
+         22  TERMO DE COMPROMISSO  Elaboracao de estudos e projetos de engenharia{\ldots}   
+         23  TERMO DE COMPROMISSO  Elaboracao de estudos e projetos de engenharia{\ldots}   
+         24  TERMO DE COMPROMISSO  Elaboracao de estudos e projetos de engenharia{\ldots}   
+         25  TERMO DE COMPROMISSO  Elaboracao de estudos e projetos de engenharia{\ldots}   
+         26  TERMO DE COMPROMISSO  Elaboracao de estudos e projetos de engenharia{\ldots}   
+         27  TERMO DE COMPROMISSO  Elaboracao de estudos e projetos de engenharia{\ldots}   
+         28  TERMO DE COMPROMISSO  Elaboracao de estudos e projetos de engenharia{\ldots}   
+         29  TERMO DE COMPROMISSO  Elaboracao de estudos e projetos de engenharia{\ldots}   
+         30  TERMO DE COMPROMISSO  MELHORIA E REFORCO DO SISTEMA DE ABASTECIMENTO{\ldots}   
+         31  TERMO DE COMPROMISSO  AMPLIACAO DO SISTEMA DE ESGOTAMENTO SANITARIO {\ldots}   
+         32  TERMO DE COMPROMISSO  LIGACAO INTRADOMICILIARES/MODULOS DOMICILIARES{\ldots}   
+         33  TERMO DE COMPROMISSO  IMPLANTAÇÃO E AMPLIAÇÃO DO SISTEMA DE ABASTECI{\ldots}   
+         34         Não se aplica  CAPACITACAO E APOIO TECNICO VISANDO A ELABORAC{\ldots}   
+         
+                                     Órgão Superior  \textbackslash{}
+         0   Ministério do Desenvolvimento Regional   
+         1                   Ministério das Cidades   
+         2                   Ministério das Cidades   
+         3                      Ministério da Saúde   
+         4                      Ministério da Saúde   
+         5                      Ministério da Saúde   
+         6                      Ministério da Saúde   
+         7                      Ministério da Saúde   
+         8                      Ministério da Saúde   
+         9                      Ministério da Saúde   
+         10                     Ministério da Saúde   
+         11                     Ministério da Saúde   
+         12  Ministério do Desenvolvimento Regional   
+         13                     Ministério da Saúde   
+         14                     Ministério da Saúde   
+         15  Ministério do Desenvolvimento Regional   
+         16  Ministério do Desenvolvimento Regional   
+         17  Ministério do Desenvolvimento Regional   
+         18  Ministério do Desenvolvimento Regional   
+         19  Ministério do Desenvolvimento Regional   
+         20  Ministério do Desenvolvimento Regional   
+         21                     Ministério da Saúde   
+         22  Ministério do Desenvolvimento Regional   
+         23  Ministério do Desenvolvimento Regional   
+         24  Ministério do Desenvolvimento Regional   
+         25  Ministério do Desenvolvimento Regional   
+         26  Ministério do Desenvolvimento Regional   
+         27  Ministério do Desenvolvimento Regional   
+         28  Ministério do Desenvolvimento Regional   
+         29  Ministério do Desenvolvimento Regional   
+         30  Ministério do Desenvolvimento Regional   
+         31  Ministério do Desenvolvimento Regional   
+         32  Ministério do Desenvolvimento Regional   
+         33                     Ministério da Saúde   
+         34                     Ministério da Saúde   
+         
+                                      Órgão/Entidade vinculada  \textbackslash{}
+         0   Ministério do Desenvolvimento Regional - Unida{\ldots}   
+         1   Ministério das Cidades - Unidades com vínculo {\ldots}   
+         2   Ministério das Cidades - Unidades com vínculo {\ldots}   
+         3                         Fundação Nacional de Saúde    
+         4                         Fundação Nacional de Saúde    
+         5                         Fundação Nacional de Saúde    
+         6                         Fundação Nacional de Saúde    
+         7                         Fundação Nacional de Saúde    
+         8                         Fundação Nacional de Saúde    
+         9                         Fundação Nacional de Saúde    
+         10                        Fundação Nacional de Saúde    
+         11                        Fundação Nacional de Saúde    
+         12  Ministério do Desenvolvimento Regional - Unida{\ldots}   
+         13                        Fundação Nacional de Saúde    
+         14                        Fundação Nacional de Saúde    
+         15  Ministério do Desenvolvimento Regional - Unida{\ldots}   
+         16  Ministério do Desenvolvimento Regional - Unida{\ldots}   
+         17  Ministério do Desenvolvimento Regional - Unida{\ldots}   
+         18  Ministério do Desenvolvimento Regional - Unida{\ldots}   
+         19  Ministério do Desenvolvimento Regional - Unida{\ldots}   
+         20  Ministério do Desenvolvimento Regional - Unida{\ldots}   
+         21                        Fundação Nacional de Saúde    
+         22  Ministério do Desenvolvimento Regional - Unida{\ldots}   
+         23  Ministério do Desenvolvimento Regional - Unida{\ldots}   
+         24  Ministério do Desenvolvimento Regional - Unida{\ldots}   
+         25  Ministério do Desenvolvimento Regional - Unida{\ldots}   
+         26  Ministério do Desenvolvimento Regional - Unida{\ldots}   
+         27  Ministério do Desenvolvimento Regional - Unida{\ldots}   
+         28  Ministério do Desenvolvimento Regional - Unida{\ldots}   
+         29  Ministério do Desenvolvimento Regional - Unida{\ldots}   
+         30  Ministério do Desenvolvimento Regional - Unida{\ldots}   
+         31  Ministério do Desenvolvimento Regional - Unida{\ldots}   
+         32  Companhia de Desenvolvimento dos Vales do São {\ldots}   
+         33                        Fundação Nacional de Saúde    
+         34                        Fundação Nacional de Saúde    
+         
+                                                Concedente              Convenente  \textbackslash{}
+         0     CAIXA ECONOMICA FEDERAL - PROGRAMAS SOCIAIS         ESTADO DO PIAUI   
+         1     CAIXA ECONOMICA FEDERAL - PROGRAMAS SOCIAIS         ESTADO DO PIAUI   
+         2     CAIXA ECONOMICA FEDERAL - PROGRAMAS SOCIAIS         ESTADO DO PIAUI   
+         3                 FUNDACAO NACIONAL DE SAUDE - DF         ESTADO DO PIAUI   
+         4                 FUNDACAO NACIONAL DE SAUDE - DF         ESTADO DO PIAUI   
+         5                 FUNDACAO NACIONAL DE SAUDE - DF         ESTADO DO PIAUI   
+         6                 FUNDACAO NACIONAL DE SAUDE - DF         ESTADO DO PIAUI   
+         7                 FUNDACAO NACIONAL DE SAUDE - DF         ESTADO DO PIAUI   
+         8                 FUNDACAO NACIONAL DE SAUDE - DF         ESTADO DO PIAUI   
+         9                 FUNDACAO NACIONAL DE SAUDE - DF         ESTADO DO PIAUI   
+         10                FUNDACAO NACIONAL DE SAUDE - DF         ESTADO DO PIAUI   
+         11                FUNDACAO NACIONAL DE SAUDE - DF         ESTADO DO PIAUI   
+         12    CAIXA ECONOMICA FEDERAL - PROGRAMAS SOCIAIS         ESTADO DO PIAUI   
+         13                FUNDACAO NACIONAL DE SAUDE - DF         ESTADO DO PIAUI   
+         14                FUNDACAO NACIONAL DE SAUDE - DF         ESTADO DO PIAUI   
+         15    CAIXA ECONOMICA FEDERAL - PROGRAMAS SOCIAIS         ESTADO DO PIAUI   
+         16    CAIXA ECONOMICA FEDERAL - PROGRAMAS SOCIAIS         ESTADO DO PIAUI   
+         17    CAIXA ECONOMICA FEDERAL - PROGRAMAS SOCIAIS   MUNICIPIO DE TERESINA   
+         18    CAIXA ECONOMICA FEDERAL - PROGRAMAS SOCIAIS   MUNICIPIO DE TERESINA   
+         19    CAIXA ECONOMICA FEDERAL - PROGRAMAS SOCIAIS         ESTADO DO PIAUI   
+         20    CAIXA ECONOMICA FEDERAL - PROGRAMAS SOCIAIS         ESTADO DO PIAUI   
+         21                FUNDACAO NACIONAL DE SAUDE - DF         ESTADO DO PIAUI   
+         22    CAIXA ECONOMICA FEDERAL - PROGRAMAS SOCIAIS   MUNICIPIO DE TERESINA   
+         23    CAIXA ECONOMICA FEDERAL - PROGRAMAS SOCIAIS   MUNICIPIO DE TERESINA   
+         24    CAIXA ECONOMICA FEDERAL - PROGRAMAS SOCIAIS   MUNICIPIO DE TERESINA   
+         25    CAIXA ECONOMICA FEDERAL - PROGRAMAS SOCIAIS   MUNICIPIO DE TERESINA   
+         26    CAIXA ECONOMICA FEDERAL - PROGRAMAS SOCIAIS   MUNICIPIO DE TERESINA   
+         27    CAIXA ECONOMICA FEDERAL - PROGRAMAS SOCIAIS   MUNICIPIO DE TERESINA   
+         28    CAIXA ECONOMICA FEDERAL - PROGRAMAS SOCIAIS   MUNICIPIO DE TERESINA   
+         29    CAIXA ECONOMICA FEDERAL - PROGRAMAS SOCIAIS   MUNICIPIO DE TERESINA   
+         30    CAIXA ECONOMICA FEDERAL - PROGRAMAS SOCIAIS   MUNICIPIO DE TERESINA   
+         31    CAIXA ECONOMICA FEDERAL - PROGRAMAS SOCIAIS   MUNICIPIO DE TERESINA   
+         32  CIA DE DES.DOS VALES DO S.FRANC.E DO PARNAIBA         ESTADO DO PIAUI   
+         33                FUNDACAO NACIONAL DE SAUDE - DF         ESTADO DO PIAUI   
+         34                FUNDACAO NACIONAL DE SAUDE - DF  SECRETARIA DAS CIDADES   
+         
+            Data de início da vigência Data de fim da vigência  Valor Celebrado (R\$)  
+         0                  2007-09-10              2017-05-08           24935041.80  
+         1                  2007-12-24              2017-06-30            5579200.00  
+         2                  2007-12-24              2017-03-30            6110062.01  
+         3                  2008-12-31              2017-03-03             402490.99  
+         4                  2008-12-31              2015-01-06             400000.00  
+         5                  2008-12-31              2015-10-20             400000.00  
+         6                  2009-12-31              2017-06-09             374473.32  
+         7                  2009-12-31              2017-05-05             800000.00  
+         8                  2009-12-31              2015-12-15             500000.00  
+         9                  2009-12-31              2015-10-16             379500.87  
+         10                 2009-12-31              2017-07-09            2000000.00  
+         11                 2009-12-31              2016-05-15             384155.86  
+         12                 2010-12-31              2019-12-31           23749010.90  
+         13                 2011-12-21              2020-06-14            7515357.15  
+         14                 2011-12-21              2018-12-21            7972773.21  
+         15                 2011-09-12              2018-12-31            3011129.00  
+         16                 2011-09-12              2019-12-31            2190658.00  
+         17                 2011-07-12              2018-12-19            2000000.00  
+         18                 2011-05-25              2019-12-19           16252727.59  
+         19                 2011-10-24              2020-02-28           14995058.20  
+         20                 2011-10-24              2017-06-30           11390000.00  
+         21                 2012-04-30              2020-04-13           10749760.14  
+         22                 2012-12-21              2019-12-19            1359000.48  
+         23                 2012-12-21              2019-12-19            2612500.83  
+         24                 2012-12-21              2019-05-19            1250000.00  
+         25                 2012-12-21              2019-12-19            1359000.48  
+         26                 2012-12-21              2019-02-19            1999499.00  
+         27                 2012-12-21              2019-12-19            1337750.23  
+         28                 2012-12-21              2019-05-19            3125000.00  
+         29                 2012-12-21              2019-12-19            4968006.80  
+         30                 2013-08-20              2018-12-19            5814454.14  
+         31                 2013-08-20              2018-12-19            8768395.28  
+         32                 2013-12-23              2020-02-20           36848675.09  
+         33                 2014-07-02              2019-12-17            7455323.88  
+         34                 2015-11-04              2021-11-04           16079928.91  
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
